@@ -256,13 +256,14 @@ function Ranked(element) {
     this.setList = function() {
         for( var i = 0 ; i < this.category.length ; i++ ){
             $('.'+this.category[i].number).text(this.category[i].number+". "+this.category[i].role);
+            $('.'+this.category[i].number).css('color',this.category[i].color);
         }
     }
 
     this.clearList = function() {
         var limit = 15;
 
-        for( var i = 1 ; i < limit ; i++ ){
+        for( var i = 1 ; i <= limit ; i++ ){
             $('.'+i).text(i+".");
         }
     }
