@@ -1,6 +1,6 @@
 var ranked = "";
 $(window).on('load', function() {
-    ranked = new Ranked("#mainTable >tbody");
+    ranked = new Ranked("#mainTable >tbody",function () { console.log('b'); });
     ranked.setTable();
 
 });
@@ -15,8 +15,9 @@ function roleChange(key,value) {
     ranked.setTable();
 }
 
-function Ranked(element) {
+function Ranked(element,afterGenerated) {
     this.element = element;
+    this.afterGenerated = afterGenerated;
     this.category = [
         {
             "name" : "Jailor",
@@ -233,8 +234,9 @@ function Ranked(element) {
         return select;
     };
 
-    this.setTable = function() {
+    this.setTable = function(afterGenerated = function () { return 'a'; }) {
         var html = '';
+        this.afterGenerated();
         for( var i = 0; i < this.category.length ; i++ ){
             html += "<tr style='color:white;background-color:"+this.category[i].color+"'>";
             html += '<td><input type="number" onchange="numberChange('+i+',this.value)" value="'+this.category[i].number+'" class="number"></td>';
@@ -268,7 +270,6 @@ function Ranked(element) {
         }
     }
 }
-
 
 function findJSON(json,checkfield,checkval)
 {
